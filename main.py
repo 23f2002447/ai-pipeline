@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 import requests
 import openai
 import os
@@ -10,6 +11,14 @@ from datetime import datetime
 # ----------------------------------
 
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],   # allow all websites
+    allow_credentials=True,
+    allow_methods=["*"],   # allow POST, OPTIONS, etc
+    allow_headers=["*"],
+)
+
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
